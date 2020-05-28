@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="w3.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style media="all"> 
+            html, body{height:100%;} 
+            body, p { margin:0; padding:0}
+        </style>
+    </head>
+    <body>
+        <div class="w3-container w3-center w3-black">
+            <h1>AST 20201 Individual Project</h1>
+            <h2>Student: Cheung Ho Kai</h2>
+        </div>
+        <div class="w3-diplay-container" >
+          <form method="POST" action="/auth" id="form_login" name="form_login">
+            <div class="w3-display-middle w3-card-4 w3-yellow w3-center" style="width:100%;">
+            <h1>Login Form</h1>
+            <p class="w3-padding">ID:&nbsp;<input type="text" id="login_id" name="login_id" required/></p>
+            <p class="w3-padding">Password:&nbsp;<input type="password" id="password" name="password" required/></p>
+                <input type="submit" id="btn_submit" name="btn_submit" value="Login" />
+            </div>
+        </form>  
+        </div>
+        
+    </body>
+</html>
