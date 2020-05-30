@@ -1,0 +1,30 @@
+doctype html
+head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  link(rel='stylesheet' href='w3.css')
+  style(media='all').
+    html, body{height:100%;}
+    body, p { margin:0; padding:0}
+  script(src='https://code.jquery.com/jquery-3.4.1.min.js')
+  script.
+    $(document).ready(function () {
+        $("#url_submit").click(function () {
+            event.preventDefault();
+            $.post("/seturl", {url: $("#url").val(), week: $("#week").val()}, function (data) {
+                alert("New URL is posted and week is updated");
+            });
+        });
+    });
+  title Teacher
+.w3-container.w3-center.w3-black
+  h1 Welcome, #{tname}
+.w3-display-container.w3-cell.w3-amber.w3-border.w3-center(style='width:50%;min-height:100%;font-size: 3em;')
+  a.w3-display-middle(href='/all_attendance') Check ALL student attendance history
+.w3-container.w3-cell.w3-amber.w3-border.w3-center(style='width:50%;min-height:100%;font-size: 3em;')
+  a Post New URL
+  form
+    p URL To post: 
+      input#url(type='text' name='url')
+    p Week: 
+      input#week(type='text' name='week' placeholder='Current week is: ')
+    input#url_submit(type='button' name='url_submit' value='Sumbit')
