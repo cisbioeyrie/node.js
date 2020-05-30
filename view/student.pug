@@ -1,0 +1,56 @@
+doctype html
+head
+  link(rel='stylesheet' href='w3.css')
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  title student
+  script.
+    window.onload = function () {
+        var d = new Date();
+        var present = d.getFullYear() + " " + (d.getMonth() + 1) + " " + d.getDate() + " ";
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        present += days[d.getDay()];
+        setInterval(function () {
+            d = new Date();
+            var hms = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+            document.getElementById("date").innerHTML = present + " " + hms;
+        }, 1000);
+    };
+    
+    function temp(x,y) {
+        var sche = x;
+        var rowd = sche.charAt(0);
+        var d = new Date();
+        var i,count=0;
+        for (i = d.getDay(); i < 8; i++)
+        {
+            if (i == 7)
+                i = 0;
+            if (i == rowd)
+                break;
+            count++;
+        }
+        var present = d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (count + d.getDate()) + "日";
+        document.getElementById("schedule"+y).innerHTML = present + " " + sche.substring(2);
+    }
+
+.w3-container.w3-center.w3-black
+  h1 Welcome, #{s_info[0].st_name}
+.w3-cell-row
+  .w3-container.w3-cell
+    h1 Next Class will start at 
+  .w3-container.w3-cell
+    h1#date
+table.w3-table.w3-bordered.w3-border.w3-hoverable
+  tr.w3-hover-white
+    th Course
+    th Schedule
+    th URL
+  each val, index in c_info
+    tr
+      td
+        a(onclick='')=val.c_name
+      td
+        span(id='schedule'+index)=val.schedule
+        srcipt temp(=val.schedule,index)
+      td
+        a(href=val.URL target='_blank' onclick='')=val.URL
