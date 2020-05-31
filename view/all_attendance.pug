@@ -1,0 +1,46 @@
+doctype html
+head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  link(rel='stylesheet' href='w3.css')
+  script(src='https://code.jquery.com/jquery-3.4.1.min.js')
+  script.
+    function openWeek(wk) {
+        var i;
+        var x = document.getElementsByClassName("wk");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        document.getElementById(wk).style.display = "table";
+    }
+    
+    function changeattendance(x, y, z) {
+        if (z === undefined) {
+            $.post("/change_attendance", {status: x, week: y});
+        } else {
+            $.post("/change_attendance", {status: x, week: y, s_id: z});
+        }
+        alert("Attendance updated,please refresh the page to see change.");
+    }
+  title all_attendance
+  .w3-bar.w3-black
+    each val, index in all_attendance_week
+      button.w3-bar-item.w3-button(id='wkbutton'+index onclick='openWeek('+ val.week +')') Week #{val.week}
+each val, index in all_attendance_week   
+  table.wk.w3-table-all.w3-large(id=val.week style='width: 50%')
+    tr
+      td SID
+      td.w3-center Status
+      td.w3-center
+        button(onclick="changeattendance('T',"+val.week+')') ALL Attended 
+        button(onclick="changeattendance('F',"+val.week+')') ALL Absent
+          -for(var i = index; i<all_attendance_record.length; i=i+all_attendance_week.length)
+            -var temp_status='T'
+              if (all_attendance_record[i].status=='T')
+                -var temp_status='F'
+              tr
+                td #{all_attendance_record[i].student_id}
+                td.w3-center #{all_attendance_record[i].status}
+                td.w3-center
+                  button(onclick="changeattendance(\'"+temp_status+'\',\''+val.week+'\',\''+ all_attendance_record[i].student_id+'\')') Switch status
+  script.
+    document.getElementById("wkbutton0").click();
