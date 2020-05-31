@@ -51,6 +51,7 @@ table.w3-table.w3-bordered.w3-border.w3-hoverable
         a(onclick='')=val.c_name
       td
         span(id='schedule'+index)=val.schedule
-        srcipt temp(=val.schedule,index)
+        srcipt temp('#{val.schedule}',#{index});
       td
         a(href=val.URL target='_blank' onclick='')=val.URL
+include footer.html
