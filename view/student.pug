@@ -2,27 +2,47 @@ doctype html
 head
   link(rel='stylesheet' href='w3.css')
   meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   title student
+  script
+      include moment.js
   script.
     window.onload = function () {
-        var d = new Date();
-        var present = d.getFullYear() + " " + (d.getMonth() + 1) + " " + d.getDate() + " ";
-        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        present += days[d.getDay()];
         setInterval(function () {
-            d = new Date();
-            var hms = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-            document.getElementById("date").innerHTML = present + " " + hms;
+            document.getElementById("date").innerHTML = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
         }, 1000);
-    };
-    
+    }
+    function auto_take_attendance(x, y) {
+                $.post("/auto_take_attendance", {course_id: x, week: y});
+                alert("You have attended the course.");
+            }
+    function show_one_attendance_record(x, y) {
+                $.post("/one_attendance", {course_id: x, c_name: y}, function (data) {
+                    document.write(data);
+                });
+            }
+    function countdown(x){        
+        var difference=0;var display;
+        for(var i=0;i<x.length;i++){
+            var time=x[i].substr(2,2);
+            var course_date=moment().day(x[i].charAt(0));
+            course_date.set({'hour': x[i].substr(2,2),'minute':x[i].substr(5,2),'second':x[i].substr(8,2)});
+            if(course_date.diff(moment())<difference||difference==0){
+                if(course_date.isSameOrAfter(moment())){
+                difference=course_date.diff(moment(),'seconds');
+                if(difference%3600>0)
+                    display=Math.round(difference/3600)+'hrs'+Math.round(difference%3600/60)+'min'+Math.round(difference%3600%60)+'sec';
+                }                
+            }
+        }
+            document.getElementById("countdown").innerHTML = 'Next Class will begin at ' + display;
+        }
     function temp(x,y) {
         var sche = x;
         var rowd = sche.charAt(0);
         var d = new Date();
         var i,count=0;
-        for (i = d.getDay(); i < 8; i++)
-        {
+        for (i = d.getDay(); i < 8; i++){
             if (i == 7)
                 i = 0;
             if (i == rowd)
@@ -32,14 +52,15 @@ head
         var present = d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + (count + d.getDate()) + "日";
         document.getElementById("schedule"+y).innerHTML = present + " " + sche.substring(2);
     }
-
 .w3-container.w3-center.w3-black
-  h1 Welcome, #{s_info[0].st_name}
+  h1 Welcome, #{sname}
 .w3-cell-row
   .w3-container.w3-cell
-    h1 Next Class will start at 
+    h1#countdown
   .w3-container.w3-cell
     h1#date
+button#showcountdown(hidden onclick='countdown(['+Object.values(c_info).map(item => '\''+item.schedule+'\'')+'])')
+script document.getElementById("showcountdown").click()
 table.w3-table.w3-bordered.w3-border.w3-hoverable
   tr.w3-hover-white
     th Course
@@ -48,10 +69,10 @@ table.w3-table.w3-bordered.w3-border.w3-hoverable
   each val, index in c_info
     tr
       td
-        a(onclick='')=val.c_name
+        a(href="javascript:void(0)" onclick='show_one_attendance_record('+val.id+',\''+val.c_name+'\')')=val.c_name
       td
-        span(id='schedule'+index)=val.schedule
-        srcipt temp('#{val.schedule}',#{index});
+        span(id='schedule'+index onclick='temp(\''+val.schedule+'\','+index+')')=val.schedule 
+        //=window.onload(temp('\''+val.schedule+'\'',index))
       td
-        a(href=val.URL target='_blank' onclick='')=val.URL
+        a(href=val.URL target='_blank' onclick='auto_take_attendance('+val.id+','+val.week+')')=val.URL
 include footer.html
