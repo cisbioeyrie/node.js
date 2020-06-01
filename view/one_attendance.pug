@@ -1,0 +1,18 @@
+doctype html
+head
+  meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+  link(rel='stylesheet' href='w3.css')
+  title attendance
+    //select * FROM attendance where course_id=${param.course_id} and student_id=&apos;${sessionScope.sid}&apos;;
+h1 #{sname} 's #{cname} Record
+table.w3-table-all.w3-large(style='width: 50%')
+  tr
+    td sid
+    td Week
+    td Status
+  each val, index in one_attendance_record
+    tr
+      td #{val.student_id}
+      td #{val.week}
+      td #{val.status}
+include footer.html
