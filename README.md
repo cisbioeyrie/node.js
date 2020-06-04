@@ -14,9 +14,9 @@ Future system enhancement:
 
 Setup
 
-download the zip files and unzip
-install node.js
-mysql setup(steps will be added later)
-use cmd to navigate to the downloaded location (cd D:\download\node.js-master)
-use cmd and type node login.js
-Go to http://localhost:3000/
+download the zip files and unzip <br>
+install node.js<br>
+mysql setup(steps will be added later)<br>
+use cmd to navigate to the downloaded location (cd D:\download\node.js-master)<br>
+use cmd and type node login.js<br>
+Go to http://localhost:3000/<br>
