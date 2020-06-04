@@ -10,3 +10,13 @@ Current target: automatically add date and time when teacher post a new url
 
 Future system enhancement: 
 1. automatically add date and time when teacher post a new url
+2. deploy to heroku
+
+Setup
+
+download the zip files and unzip
+install node.js
+mysql setup(steps will be added later)
+use cmd to navigate to the downloaded location (cd D:\download\node.js-master)
+use cmd and type node login.js
+Go to http://localhost:3000/
