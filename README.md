@@ -6,12 +6,11 @@
           teacher part fundamental function completed.<br>
 2020/6/1  student part fundamental function completed. Student can view own attendance and take attendance automatically by clicking the             url link. Footer improved with redirect to main mage. Added session checking. Add course countdown timer of student.     
 
-Current target: automatically add date and time when teacher post a new url
+Current target: deploy to heroku
 
 Future system enhancement: 
-1. automatically add date and time when teacher post a new url
-2. deploy to heroku
-3. improve database setup
+1. deploy to heroku
+2. improve database setup
 
 Setup
 
