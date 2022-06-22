@@ -4,7 +4,7 @@
   "description": "To whom concern,\r I only able to finish the login part using node.js.\r I will keep learning node.js and finish the remaining part of system.\r The updated code will be posted on github.\r https://github.com/cisbioeyrie/node.js/upload/master",
   "main": "login.js",
   "dependencies": {
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.5.0",
